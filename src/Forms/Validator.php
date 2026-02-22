@@ -12,6 +12,7 @@ namespace Nette\Forms;
 use Nette;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
+use Stringable;
 
 
 /**
@@ -54,6 +55,9 @@ final class Validator
 		$message = $rule->message;
 		if ($message instanceof Nette\HtmlStringable) {
 			return $message;
+
+		} elseif ($message instanceof Stringable) {
+			return (string)$message;
 
 		} elseif ($message === null && is_string($rule->validator) && isset(static::$messages[$rule->validator])) {
 			$message = static::$messages[$rule->validator];
